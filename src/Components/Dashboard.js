@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import TextField from "@mui/material/TextField"
 import { useDispatch, useSelector } from "react-redux";
-import {setUser,EventType,NoOfGuest,EventDate } from "../rootSlice";
-import store from "../store"
+import {setUser,EventType,NoOfGuest } from "../rootSlice";
+// import store from "../store"
 import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import TimePicker from '@mui/lab/TimePicker';
-import DateTimePicker from '@mui/lab/DateTimePicker';
+// import TimePicker from '@mui/lab/TimePicker';
+// import DateTimePicker from '@mui/lab/DateTimePicker';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-import MobileDatePicker from '@mui/lab/MobileDatePicker';
+// import MobileDatePicker from '@mui/lab/MobileDatePicker';
 
 
 const initialValues = {
@@ -24,9 +24,11 @@ const initialValues = {
 
 const Dashboard = () => {
   
-  const [values, setValues] = useState("")
+  // const [values, setValues] = useState("")
 
   const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+
+  console.log(value)
 
   const timeChange = (newValue) => {
     setValue(newValue);
@@ -50,9 +52,9 @@ const Dashboard = () => {
     dispatch(NoOfGuest(e.target.value));
   }
 
-  const EventDateHandleChange = (e) => {
-    dispatch(EventDate(value));
-  }
+  // const EventDateHandleChange = (e) => {
+  //   dispatch(EventDate(value));
+  // }
 
   const state = useSelector((state) =>(state.user))
 

@@ -1,13 +1,13 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
-import FormControl from '@mui/material/FormControl';
+// import FormControl from '@mui/material/FormControl';
 import * as Yup from 'yup';
-import {Button, FormGroup, TextField, Select, MenuItem, Checkbox} from "@mui/material"
+// import {Button, FormGroup, TextField, Select, MenuItem, Checkbox} from "@mui/material"
 import TextFeild from "@mui/material/TextField"
-import { useDispatch } from "react-redux";
-import {setUser,EventType,NoOfGuest,EventDate } from "../rootSlice";
-import InputLabel from '@mui/material/InputLabel';
-import INITIAL_STATE from "../state"
+// import { useDispatch } from "react-redux";
+// import {setUser,EventType,NoOfGuest,EventDate } from "../rootSlice";
+// import InputLabel from '@mui/material/InputLabel';
+// import INITIAL_STATE from "../state"
 import {} from "./TextFeild"
 
 
@@ -25,47 +25,47 @@ const Photobooth = () => {
     
   };
 
-  const [range, setRange] = React.useState('');
+  // const [range, setRange] = React.useState('');
 
   
-  const [values, setValues] = useState(null)
+  // const [values, setValues] = useState(null)
 
-  const [checked, setChecked] = React.useState();
+  // const [checked, setChecked] = React.useState();
 
-  const [secondRange, setSecondRange] = React.useState();
-
-
-
-  const dispatch = useDispatch();
+  // const [secondRange, setSecondRange] = React.useState();
 
 
-  const handleChange = (e) => {
-    dispatch(setUser(e.target.value));
-  };
 
-  const EventHandleChange = (e) => {
-    dispatch(EventType(e.target.value))
-  }
+//   const dispatch = useDispatch();
 
-  const NoOfGuestHandleChange = (e) => {
-    dispatch(NoOfGuest(e.target.value))
-  }
 
-  const EventDateHandleChange = (e) => {
-    dispatch(EventDate(e.target.value))
-  }
+//   const handleChange = (e) => {
+//     dispatch(setUser(e.target.value));
+//   };
 
-  const SelectHandleChange = (event) => {
-    setRange(event.target.value);
-  };
+//   const EventHandleChange = (e) => {
+//     dispatch(EventType(e.target.value))
+//   }
 
-  const SelectSecondHandleChange = (event) => {
-    setSecondRange(event.target.value);
-  };
+//   const NoOfGuestHandleChange = (e) => {
+//     dispatch(NoOfGuest(e.target.value))
+//   }
 
-  const checkboxHandleChange = (e) => {
-    setChecked( e.target.checked ? 1 : 0)
-}
+//   const EventDateHandleChange = (e) => {
+//     dispatch(EventDate(e.target.value))
+//   }
+
+//   const SelectHandleChange = (event) => {
+//     setRange(event.target.value);
+//   };
+
+//   const SelectSecondHandleChange = (event) => {
+//     setSecondRange(event.target.value);
+//   };
+
+//   const checkboxHandleChange = (e) => {
+//     setChecked( e.target.checked ? 1 : 0)
+// }
 
 
 

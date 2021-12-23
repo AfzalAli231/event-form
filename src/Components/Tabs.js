@@ -78,6 +78,8 @@ const VanueForm = () => {
 
   // const [checked, setChecked] = useState();
 
+  console.log(setToggle, setSecondToggle, setThirdToggle, setFourthToggle, setFifthToggle, setTimeStart, setEndTime)
+
 
   console.log("time", startTime)
 
@@ -94,6 +96,8 @@ const VanueForm = () => {
   const handleChangee = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
+
+  console.log(handleChangee);
 
 
   console.log("values", values)

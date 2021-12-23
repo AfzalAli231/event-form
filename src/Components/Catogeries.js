@@ -6,9 +6,9 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import Switch from "@mui/material/Switch";
 import Tabs from "./Tabs"
-import VanueForm from './venueForm';
-import FoodForm from './Foodform';
-import Decorationform from './Decorationform';
+// import VanueForm from './venueForm';
+// import FoodForm from './Foodform';
+// import Decorationform from './Decorationform';
 
 const Catogeries = () => {
 
