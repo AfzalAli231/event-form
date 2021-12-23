@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import TextField from "@mui/material/TextField"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {setUser,EventType,NoOfGuest,EventDate } from "../rootSlice";
-// import store from "../store"
+import store from "../store"
 import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-// import TimePicker from '@mui/lab/TimePicker';
-// import DateTimePicker from '@mui/lab/DateTimePicker';
+import TimePicker from '@mui/lab/TimePicker';
+import DateTimePicker from '@mui/lab/DateTimePicker';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-// import MobileDatePicker from '@mui/lab/MobileDatePicker';
+import MobileDatePicker from '@mui/lab/MobileDatePicker';
 
 
 const initialValues = {
@@ -24,7 +24,7 @@ const initialValues = {
 
 const Dashboard = () => {
   
-  // const [values, setValues] = useState("")
+  const [values, setValues] = useState("")
 
   const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
 
@@ -50,24 +50,24 @@ const Dashboard = () => {
     dispatch(NoOfGuest(e.target.value));
   }
 
-  // const EventDateHandleChange = (e) => {
+  const EventDateHandleChange = (e) => {
     dispatch(EventDate(value));
-  // }
+  }
 
-  // const state = useSelector((state) =>(state.user))
+  const state = useSelector((state) =>(state.user))
 
-  // console.log("sate", state)
+  console.log("sate", state)
 
-  // const eventname = useSelector((state) => state.user.eventname)
-  // const eventtypeid = useSelector((state) => state.user.eventtypeid)
-  // const eventguest = useSelector((state) => state.user.eventguest)
-  // const eventdate = useSelector((state) => state.user.eventdate)
+  const eventname = useSelector((state) => state.user.eventname)
+  const eventtypeid = useSelector((state) => state.user.eventtypeid)
+  const eventguest = useSelector((state) => state.user.eventguest)
+  const eventdate = useSelector((state) => state.user.eventdate)
 
   
-  // console.log(eventname + ">>")
-  // console.log(eventtypeid + ">>")
-  // console.log(eventguest + ">>")
-  // console.log(eventdate + ">>")
+  console.log(eventname + ">>")
+  console.log(eventtypeid + ">>")
+  console.log(eventguest + ">>")
+  console.log(eventdate + ">>")
 
 
     return (
@@ -83,8 +83,8 @@ const Dashboard = () => {
         eventDate: Yup.date().nullable(),
       })}
       onSubmit={(values, formikHelpers) => {
-        // console.log(values.eventDate + "values")
-        // console.log(formikHelpers)
+        console.log(values.eventDate + "values")
+        console.log(formikHelpers)
       }}
 
     >
@@ -98,7 +98,7 @@ const Dashboard = () => {
               <p  style={{padding:"10px 2px 10px 5px"}}>Event Profile</p>
             </div>
             </div>
-          {/* {console.log(formik.values)} */}
+          {console.log(formik.values)}
           <Form>
              <div  style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
                <div  style={{width:"45%"}}>

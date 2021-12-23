@@ -1,0 +1,115 @@
+{
+  "userid": 1,
+  "photographypackageid": 1,
+  "videographypackageid": 1,
+  "eventname": "Test",
+  "eventtypeid": 1,
+  "eventguest": "100",
+  "eventdate": "2021-12-07T13:49:44.628Z",
+  "evenue": 1,
+  "efood": 1,
+  "edecoration": 1,
+  "efloral": 1,
+  "eaddonsdancefloor": 1,
+  "eaddonsdisplay": 1,
+  "eaddonssound": 1,
+  "eaddonsphotobooth": 1,
+  "eaddonsushers": 1,
+  "eaddonssinger": 1,
+  "eaddonssecurity": 1,
+  "eaddonsgenerator": 1,
+  "is_deleted": 0,
+  "eventvenue": {
+    "venueservices": "1",
+    "preferredarea1": "Area",
+    "preferredarea2": "area2",
+    "preferredarea3": "area3",
+    "starttime": "33:58:52",
+    "endtime": "36:58:52",
+    "venuepricerange": "1",
+    "venueanyothers": "ANy OTher",
+    "is_deleted": 0
+  },
+  "eventfood": {
+    "menupackageid": 2,
+    "createyourown": "1",
+    "is_deleted": 1
+  },
+  "eventdecoration": {
+    "themeevent": 1,
+    "yourtheme": "asdasd",
+    "themereferenceimages": "\"1\"",
+    "colorscheme": "asdasd",
+    "eventsegregated": 1,
+    "decorationclassifies": 1,
+    "decorationgenerator": 1,
+    "decorationstage": 1,
+    "briefaboutstage": "asda",
+    "decorationpackageid": 1,
+    "createyourowndecoration": "\"1\""
+  },
+  "eventv": {
+    "vpackageid": 2
+  },
+  "eventp": {
+    "ppackageid": 2
+  },
+  "eventfloral": {
+    "floralservices": "\"1\"",
+    "kindofflower": 1,
+    "floralpricerange": 1,
+    "floralspecifytheme": "\"1\"",
+    "floralexplaintheme": "asda",
+    "floralimages": "\"1\""
+  },
+  "eventaddonsdancefloor": {
+    "addonsdancetype": "as",
+    "addonsdancesize": "as",
+    "addonsdancecirculartrussing": "asd",
+    "addonsdanceanyspecify": "asdas"
+  },
+  "eventaddonsdisplay": {
+    "addonsprojectorsneeded": "asd",
+    "addonsprojectorsize": "asd",
+    "addonsprojectorqty": 1,
+    "addonsledneeded": "asd",
+    "addonsledsize": "asd",
+    "addonsledqty": 1,
+    "addonssmdplasma": "asda",
+    "addonssmdsize": "asdas",
+    "addonssmdqty": 0,
+    "addonsdisplayanyspecify": "asdsa"
+  },
+  "eventaddonsgenerator": {
+    "addonsgeneratorkva": "asdasdasdsa"
+  },
+  "eventaddonsphotobooth": {
+    "addonsphotobooththeme": "asda",
+    "addonsphotoboothbudget": 1,
+    "addonsphotoboothimages": "\"asd\""
+  },
+  "eventaddonssecurity": {
+    "addonsbouncers": "as",
+    "addonsvolunteers": "asd",
+    "addonsarmedguards": "asd",
+    "addonswtsates": "asd"
+  },
+  "eventaddonssinger": {
+    "addonssingersintrested": "asd",
+    "addonsishosted": "asd",
+    "addonsbudgets": "asd",
+    "addonsgivebrief": "asdas"
+  },
+  "eventaddonssound": {
+    "addonssounddescription": "asd",
+    "addonssoundqty": 1,
+    "addonssoundanyspecify": "asd"
+  },
+  "usher": {
+    "nohrservices": "asd",
+    "noushers": "asd",
+    "agebracket": "asd",
+    "givebrief": "asd",
+    "skills": "asd"
+  }
+}

@@ -12,7 +12,10 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import HomeOutlined from "@mui/icons-material/HomeOutlined";
 import HomeIcon from "./Homeicon";
-import FoodIcon from './FoodIcon'
+import FoodIcon from "./FoodIcon";
+import DecorationIcon from "./DecorationIcon";
+import FloralIcon from "./FloralIcon";
+import AddonsIcon from "./AddonsIcon";
 import Flrolform from "./Floralform"
 import Addons from "./Addons";
 import VenueFormm from "./venueForm";
@@ -64,6 +67,9 @@ const VanueForm = () => {
 
   const [ toggle, setToggle] = useState(false);
   const [secondToggle, setSecondToggle] = useState(false);
+  const [thirdToggle, setThirdToggle] = useState(false);
+  const [fourthToggle, setFourthToggle] = useState(false);
+  const [fifthToggle, setFifthToggle] = useState(false);
 
   const [startTime, setTimeStart] = useState(new Date());
 
@@ -113,73 +119,93 @@ const VanueForm = () => {
         >
           {(formik) => (
             <div>
-              <Box>
-                <Box style={{ backgroundColor: "#9c28af" }}>
-                  <Tabs
-                    value={value}
-                    variant="fullWidth"
-                    onChange={handleChange}
-                    aria-label="basic tabs example"
+              <Box style={{ backgroundColor: "rgb(0, 255, 136)" }}>
+                <Tabs
+                  value={value}
+                  variant="fullWidth"
+                  onChange={handleChange}
+                  aria-label="basic tabs example"
+                  style={{ border: "1px solid red" }}
+                >
+                  <Tab
+                    label={<HomeIcon />}
+                    {...a11yProps(0)}
                     style={{ border: "1px solid red" }}
-                  >
+                  />
+
+                  {toggle === true ? (
                     <Tab
-                      label={<HomeIcon />}
+                      label={<HomeOutlined />}
                       {...a11yProps(0)}
                       style={{ border: "1px solid red" }}
                     />
+                  ) : null}
 
-                    {toggle === true ? (
-                      <Tab
-                        label={<HomeOutlined />}
-                        {...a11yProps(1)}
-                        style={{ border: "1px solid red" }}
-                      />
-                    ) : null}
-
+                  <Tab
+                    label={<FoodIcon />}
+                    {...a11yProps(1)}
+                    style={{ border: "1px solid red" }}
+                  />
+                  {secondToggle === true ? (
                     <Tab
-                      label={<FoodIcon />}
+                      label={<FastfoodOutlinedIcon />}
+                      {...a11yProps(1)}
+                      style={{ border: "2px solid red" }}
+                    />
+                  ) : null}
+                  <Tab
+                    label={<DecorationIcon />}
+                    {...a11yProps(2)}
+                    style={{ border: "1px solid red" }}
+                  />
+                  {thirdToggle === true ? (
+                    <Tab
+                      label={<AirlineSeatReclineNormalIcon />}
                       {...a11yProps(2)}
                       style={{ border: "1px solid red" }}
                     />
-                    {secondToggle === true ? (
-                      <Tab label={<FastfoodOutlinedIcon />}
-                      {...a11yProps(3)}
-                      style={{border: "2px solid red"}}
-                      />
-                    ) : null}
+                  ) : null}
+                  <Tab
+                    label={<FloralIcon />}
+                    {...a11yProps(3)}
+                    style={{ border: "1px solid red" }}
+                  />
+                  {fourthToggle === true ? (
                     <Tab
-                      label={<AirlineSeatReclineNormalIcon />}
+                      label={<AddAPhotoIcon />}
                       {...a11yProps(3)}
                       style={{ border: "1px solid red" }}
                     />
+                  ) : null}
+                  <Tab
+                    label={<AddonsIcon />}
+                    {...a11yProps(4)}
+                    style={{ border: "1px solid red" }}
+                  />
+                  {fifthToggle === true ? (
                     <Tab
-                      label={<AddAPhotoIcon />}
+                      label={<AcUnitIcon />}
                       {...a11yProps(4)}
                       style={{ border: "1px solid red" }}
                     />
-                    <Tab
-                      label={<AcUnitIcon />}
-                      {...a11yProps(5)}
-                      style={{ border: "1px solid red" }}
-                    />
-                  </Tabs>
-                </Box>
-                <TabPanel value={value} index={0}>
-                  <VenueFormm />
-                </TabPanel>
-                <div>
-                  <TabPanel value={value} index={1}>
-                    {<FoodForm />}
-                  </TabPanel>
-                </div>
-                <TabPanel value={value} index={2}></TabPanel>
-                <TabPanel value={value} index={3}>
-                  {<Flrolform />}
-                </TabPanel>
-                <TabPanel value={value} index={4}>
-                  {<Addons />}
-                </TabPanel>
+                  ) : null}
+                </Tabs>
               </Box>
+              <TabPanel value={value} index={0}>
+                <VenueFormm />
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                {<FoodForm />}
+              </TabPanel>
+              <TabPanel value={value} index={2}></TabPanel>
+              <TabPanel value={value} index={3}>
+                {<Flrolform />}
+              </TabPanel>
+                  {fifthToggle === true ? (
+              <TabPanel value={value} index={4}>
+                {<Addons />}
+              </TabPanel>
+                  ) : null }
             </div>
           )}
         </Formik>

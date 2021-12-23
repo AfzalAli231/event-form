@@ -6,12 +6,18 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import Switch from "@mui/material/Switch";
 import Tabs from "./Tabs"
+import VanueForm from './venueForm';
+import FoodForm from './Foodform';
+import Decorationform from './Decorationform';
 
 const Catogeries = () => {
 
     const [toggle, setToggle] = useState(false);
     const [secondToggle, setSecondToggle] = useState(false);
-      
+    const [thirdToggle, setThirdToggle] = useState(false);
+    const [fourthToggle, setFourthToggle] = useState(false);
+    const [fifthToggle, setFifthToggle] = useState(false);
+  
   
     const handleVenueClick = () => {
       setToggle(!toggle)
@@ -23,6 +29,21 @@ const Catogeries = () => {
       setSecondToggle(!secondToggle);
       console.log(secondToggle);
     };  
+
+    const handleDecorationClick = () => {
+      setThirdToggle(!thirdToggle);
+      console.log(thirdToggle);
+    }; 
+
+    const handleFloralClick = () => {
+      setFourthToggle(!fourthToggle);
+      console.log(fourthToggle);
+    }; 
+
+    const handleAddonsClick = () => {
+      setFifthToggle(!fifthToggle);
+      console.log(fifthToggle);
+    }; 
 
 
     return (
@@ -88,13 +109,13 @@ const Catogeries = () => {
               <Switch onClick={handleFoodClick} />
             </div>
             <div>
-              <Switch onClick="" />
+              <Switch onClick={handleDecorationClick} />
             </div>
             <div>
-              <Switch onClick="" />
+              <Switch onClick={handleFloralClick} />
             </div>
             <div>
-              <Switch onClick="" />
+              <Switch onClick={handleAddonsClick} />
             </div>
           </div>
 
@@ -108,9 +129,24 @@ const Catogeries = () => {
               <Tabs />
             </div>
           ) : null}
+          {thirdToggle ? (
+            <div style={{ marginTop: "10px", marginBottom: "50px" }}>
+              <Tabs />
+            </div>
+          ) : null}
+          {fourthToggle ? (
+            <div style={{ marginTop: "10px", marginBottom: "50px" }}>
+              <Tabs />
+            </div>
+          ) : null}
+          {fifthToggle ? (
+            <div style={{ marginTop: "10px", marginBottom: "50px" }}>
+              <Tabs />
+            </div>
+          ) : null}
         </div>
       </div>
     );
 }
 
-export default Catogeries
+export default Catogeries;

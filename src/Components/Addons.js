@@ -85,7 +85,7 @@ console.log(fourthToggle === "panel4" ? 1 : 0)
     <div>
       <Accordion expanded={toggle === 'panel1'} onChange={toggleChange('panel1')}  TransitionProps={{ unmountOnExit: true }}>
         <AccordionSummary 
-        style={{backgroundColor:"#F5F5F5", padding:"10px 0px 10px 15px", border:"1px solid  red"}}
+        style={{backgroundColor:"#F5F5F5", padding:"10px 0px 10px 15px"}}
           expandIcon={<Checkbox checked={toggle} /> }
           aria-controls="panel1bh-content"
           id="panel1bh-header"
@@ -201,10 +201,6 @@ console.log(fourthToggle === "panel4" ? 1 : 0)
           <Generator />
         </AccordionDetails>
       </Accordion>
-
-      <button onClick = {toggleChange}>
-          hello
-      </button>
     </div>
   );
 }

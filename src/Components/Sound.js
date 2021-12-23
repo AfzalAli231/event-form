@@ -67,67 +67,87 @@ const Sound = () => {
 }
 
     return (
-        <Box component="form" onSubmit={handleSubmit} >
-            
-             <div  style={{display:"flex", flexDirection:"row",flexWrap:"wrap" ,justifyContent:"space-between"}}>
+      <Box component="form" onSubmit={handleSubmit}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+          }}
+        >
+          <div style={{ width: "60%" }}>
+            <FormGroup>
+              <TextField
+                onChange={handleChange("sounddescription")}
+                value={values.sounddescription}
+                label="Sound Description"
+                name="sound"
+                type="text"
+                id="sound"
+                error={formik.touched.sound && Boolean(formik.errors.sound)}
+                helperText={formik.touched.sound && formik.errors.sound}
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                  marginTop: "10px",
+                  backgroundColor: "#F5F5F5",
+                }}
+              />
+            </FormGroup>
+          </div>
 
-                          <div style={{width:"60%"}}>
-                            <FormGroup>
-                            <TextField  
-                           onChange={handleChange('sounddescription')} 
-                           value={values.sounddescription}
-                           label="Sound Description" 
-                           name="sound" 
-                           type="text"
-                           id="sound"
-                           error={formik.touched.sound && Boolean(formik.errors.sound)}
-                           helperText={formik.touched.sound && formik.errors.sound}  
-                           style={{width:"100%" ,  textAlign:"center", marginTop:"10px", backgroundColor:"#F5F5F5"}}  />
-                            </FormGroup>
-                          
-                            
-                          </div>
+          <div style={{ width: "30%" }}>
+            <FormGroup>
+              <TextField
+                onChange={handleChange("quantity")}
+                label="qty *"
+                name="qty"
+                value={values.quantity}
+                type="text"
+                id="qty"
+                error={formik.touched.qty && Boolean(formik.errors.qty)}
+                helperText={formik.touched.qty && formik.errors.qty}
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                  marginTop: "10px",
+                  backgroundColor: "#F5F5F5",
+                }}
+              />
+            </FormGroup>
+          </div>
 
-                          <div  style={{width:"30%"}}>
-                            <FormGroup>
-                              <TextField
-                               onChange={handleChange('quantity')}
-                               label="qty *" 
-                               name="qty"
-                               value={values.quantity}
-                               type="text"
-                               id="qty"
-                               error={formik.touched.qty && Boolean(formik.errors.qty)}
-                               helperText={formik.touched.qty && formik.errors.qty}
-                               style={{width:"100%" ,  textAlign:"center", marginTop:"10px" , backgroundColor:"#F5F5F5"}}  />
-                              </FormGroup>
-                            
-                          </div>
-            
-
-              <div style={{ justifyContent:"space-between", marginTop:"10px"}}>
-              <div  style={{width:"100%"}}>
-                <TextField  
-                onChange={handleChange('specification')} 
-                label="Add your specification (if any)"  
-                type="text" 
+          <div style={{ justifyContent: "space-between", marginTop: "10px" }}>
+            <div style={{ width: "100%" }}>
+              <TextField
+                onChange={handleChange("specification")}
+                label="Add your specification (if any)"
+                type="text"
                 value={values.specification}
                 fullWidth
-                style={{width:"100%" ,  textAlign:"center", marginTop:"10px", backgroundColor:"#F5F5F5", border:"1px solid red"}}  /></div>
-              </div>
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                  marginTop: "10px",
+                  backgroundColor: "#F5F5F5",
+                  border: "1px solid red",
+                }}
+              />
+            </div>
+          </div>
+        </div>
 
-              </div>
-              
-              <div  style={{textAlign:"center", marginTop:"20px"}}>
-                        <Button  type='submit' style={{backgroundColor:"purple", color:"white"}} >Save</Button>
-                        </div>
-
-                        
-             
-         
-        </Box>
-        
-    )
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <Button
+            type="submit"
+            style={{ backgroundColor: "rgb(0, 255, 136)", color: "black" }}
+          >
+            Save
+          </Button>
+        </div>
+      </Box>
+    );
 }
 
 export default Sound
