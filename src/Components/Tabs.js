@@ -19,7 +19,7 @@ import AddonsIcon from "./AddonsIcon";
 import Flrolform from "./Floralform"
 import Addons from "./Addons";
 import VenueFormm from "./venueForm";
-import FoodForm from "./Foodform";
+import Foodoptions from "./Foodoptions";
 
 
 function TabPanel(props) {
@@ -198,18 +198,16 @@ const VanueForm = () => {
               <TabPanel value={value} index={0}>
                 <VenueFormm />
               </TabPanel>
-              <TabPanel value={value} index={1}>
-                {<FoodForm />}
+              <TabPanel value={value} index={1} style={{marginTop: "20"}}>
+                {<Foodoptions />}
               </TabPanel>
               <TabPanel value={value} index={2}></TabPanel>
               <TabPanel value={value} index={3}>
                 {<Flrolform />}
               </TabPanel>
-                  {fifthToggle === true ? (
               <TabPanel value={value} index={4}>
                 {<Addons />}
               </TabPanel>
-                  ) : null }
             </div>
           )}
         </Formik>

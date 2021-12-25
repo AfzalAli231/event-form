@@ -5,7 +5,7 @@ import { Container } from "@mui/material";
 
 function App() {
   return (
-    <div >
+    <div>
       <Container maxWidth="xl">
         <Dashboard />
         <Catogeries />
