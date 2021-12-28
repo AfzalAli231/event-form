@@ -1,6 +1,5 @@
 import "./App.css";
-// import Example from "./Example";
-import Catogeries from "./Components/Catogeries";
+import Tabs from "./Components/Tabs";
 import Dashboard from "./Components/Dashboard";
 import { Container } from "@mui/material";
 
@@ -10,9 +9,8 @@ function App() {
       <Container maxWidth="xl">
         
         <Dashboard />
-        <Catogeries />
+        <Tabs />
         
-        {/* <Example /> */}
       </Container>
     </div>
   );

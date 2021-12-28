@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from 'yup';
 import FastfoodOutlinedIcon from "@mui/icons-material/FastfoodOutlined";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
@@ -11,15 +11,12 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import HomeOutlined from "@mui/icons-material/HomeOutlined";
-import HomeIcon from "./Homeicon";
-import FoodIcon from "./FoodIcon";
-import DecorationIcon from "./DecorationIcon";
-import FloralIcon from "./FloralIcon";
-import AddonsIcon from "./AddonsIcon";
 import Flrolform from "./Floralform"
 import Addons from "./Addons";
 import VenueFormm from "./venueForm";
+import Decorationform from "./Decorationform";
 import Foodoptions from "./Foodoptions";
+import { Switch } from "@mui/material";
 
 
 function TabPanel(props) {
@@ -61,24 +58,27 @@ const initialValues = {
 
 const VanueForm = () => {
 
-
+  
 
   const [value, setValue] = useState(0);
-
-  const [ toggle, setToggle] = useState(false);
-  const [secondToggle, setSecondToggle] = useState(false);
-  const [thirdToggle, setThirdToggle] = useState(false);
-  const [fourthToggle, setFourthToggle] = useState(false);
-  const [fifthToggle, setFifthToggle] = useState(false);
+  
+  const [categorySwitch, setCategorySwitch] = React.useState({
+    isVenue: false,
+    isFood: false,
+    isDecorations: false,
+    // isPhotography: false,
+    isFlorals: false,
+    isAddons: false,
+  });
+  //  state to manage display and hide functionality of tabs menu on the basis of user category selection
+  const [isTabsMenuDisplay, setIsTabsMenuDisplay] = useState(false);
 
   const [startTime, setTimeStart] = useState(new Date());
 
   const [endTimee, setEndTime] = useState(new Date());
-
+console.log(setTimeStart, setEndTime);
 
   // const [checked, setChecked] = useState();
-
-  console.log(setToggle, setSecondToggle, setThirdToggle, setFourthToggle, setFifthToggle, setTimeStart, setEndTime)
 
 
   console.log("time", startTime)
@@ -104,10 +104,118 @@ const VanueForm = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+const handleChangeCategory = (event) => {
+    setCategorySwitch({
+      ...categorySwitch,
+      [event.target.name]: event.target.checked,
+    });
+  };
 
+  // this effect is listening to the changes in category switches changes
+  useEffect(() => {
+    setIsTabsMenuDisplay(tabMenuDisplayHandler());
+  }, [categorySwitch]);
+
+  // this function is responsible for defining the value that if the tab can display or not
+  const tabMenuDisplayHandler = () => {
+    const values = Object.values(categorySwitch);
+    // console.log(values);
+    return values.find((item) => {
+      return item === true;
+    });
+  };
 
   return (
     <div>
+        <div>
+          <p
+            style={{
+              backgroundColor: "lightgray",
+              width: "130px",
+              padding: "10px 0px 10px 10px",
+            }}
+          >
+            Select Categories
+          </p>
+        </div>
+
+        <div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              flex: "1",
+              marginTop: "20px",
+            }}
+          >
+            <div>
+              <HomeOutlined />
+              <p>Venue</p>
+            </div>
+            <div>
+              <FastfoodOutlinedIcon />
+              <p>Food</p>
+            </div>
+            <div>
+              <AirlineSeatReclineNormalIcon />
+              <p>Decorations</p>
+            </div>
+            <div>
+              <AddAPhotoIcon />
+              <p>Floral</p>
+            </div>
+            <div>
+              <AcUnitIcon />
+              <p>Addons</p>
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              flex: "1",
+              marginTop: "0px",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              <Switch checked={categorySwitch.isVenue}
+                        onChange={handleChangeCategory}
+                        name="isVenue"
+                        color="primary" />
+            </div>
+            <div>
+              <Switch checked={categorySwitch.isFood}
+                        onChange={handleChangeCategory}
+                        name="isFood"
+                        color="primary" />
+            </div>
+            <div>
+              <Switch checked={categorySwitch.isDecorations}
+                        onChange={handleChangeCategory}
+                        name="isDecorations"
+                        color="primary" />
+            </div>
+            <div>
+              <Switch checked={categorySwitch.isFlorals}
+                        onChange={handleChangeCategory}
+                        name="isFlorals"
+                        color="primary" />
+            </div>
+            <div>
+              <Switch checked={categorySwitch.isAddons}
+                        onChange={handleChangeCategory}
+                        name="isAddons"
+                        color="primary" />
+            </div>
+          </div>
+
+          {isTabsMenuDisplay && (
+            <div style={{ marginTop: "10px", marginBottom: "50px" }}>
+              <div>
       <div>
         <Formik
           initialValues={initialValues}
@@ -131,88 +239,66 @@ const VanueForm = () => {
                   aria-label="basic tabs example"
                   style={{ border: "1px solid red" }}
                 >
-                  <Tab
-                    label={<HomeIcon />}
-                    {...a11yProps(0)}
-                    style={{ border: "1px solid red" }}
-                  />
-
-                  {toggle === true ? (
                     <Tab
-                      label={<HomeOutlined />}
+                      label={categorySwitch.isVenue && "Venue"}
+                      icon={categorySwitch.isVenue && <HomeOutlined />}
                       {...a11yProps(0)}
                       style={{ border: "1px solid red" }}
                     />
-                  ) : null}
 
-                  <Tab
-                    label={<FoodIcon />}
-                    {...a11yProps(1)}
-                    style={{ border: "1px solid red" }}
-                  />
-                  {secondToggle === true ? (
                     <Tab
-                      label={<FastfoodOutlinedIcon />}
+                      label={categorySwitch.isFood && "Food"}
+                      icon={categorySwitch.isFood && <FastfoodOutlinedIcon />}
                       {...a11yProps(1)}
                       style={{ border: "2px solid red" }}
                     />
-                  ) : null}
-                  <Tab
-                    label={<DecorationIcon />}
-                    {...a11yProps(2)}
-                    style={{ border: "1px solid red" }}
-                  />
-                  {thirdToggle === true ? (
+                    
                     <Tab
-                      label={<AirlineSeatReclineNormalIcon />}
+                      label={categorySwitch.isDecorations && "Decoration"}
+                      icon={categorySwitch.isDecorations && <AirlineSeatReclineNormalIcon />}
                       {...a11yProps(2)}
                       style={{ border: "1px solid red" }}
                     />
-                  ) : null}
-                  <Tab
-                    label={<FloralIcon />}
-                    {...a11yProps(3)}
-                    style={{ border: "1px solid red" }}
-                  />
-                  {fourthToggle === true ? (
+
                     <Tab
-                      label={<AddAPhotoIcon />}
+                      label={categorySwitch.isFlorals && "Floral"}
+                      icon={categorySwitch.isFlorals && <AddAPhotoIcon />}
                       {...a11yProps(3)}
                       style={{ border: "1px solid red" }}
                     />
-                  ) : null}
-                  <Tab
-                    label={<AddonsIcon />}
-                    {...a11yProps(4)}
-                    style={{ border: "1px solid red" }}
-                  />
-                  {fifthToggle === true ? (
+                    
                     <Tab
-                      label={<AcUnitIcon />}
+                      label={categorySwitch.isAddons && "Addons"}
+                      icon={categorySwitch.isAddons && <AcUnitIcon />}
                       {...a11yProps(4)}
                       style={{ border: "1px solid red" }}
                     />
-                  ) : null}
                 </Tabs>
               </Box>
               <TabPanel value={value} index={0}>
-                <VenueFormm />
+                {categorySwitch.isVenue && <VenueFormm />}
               </TabPanel>
               <TabPanel value={value} index={1} style={{ marginTop: "20" }}>
-                {<Foodoptions />}
+                {categorySwitch.isFood && <Foodoptions />}
               </TabPanel>
-              <TabPanel value={value} index={2}></TabPanel>
+              <TabPanel value={value} index={2}>
+                {categorySwitch.isDecorations && <Decorationform />}
+              </TabPanel>
               <TabPanel value={value} index={3}>
-                {<Flrolform />}
+                {categorySwitch.isFlorals && <Flrolform />}
               </TabPanel>
               <TabPanel value={value} index={4}>
-                {<Addons />}
+                {categorySwitch.isAddons && <Addons />}
               </TabPanel>
             </div>
           )}
         </Formik>
       </div>
     </div>
+            </div>
+          )}
+        </div>
+      </div>
   );
 };
 

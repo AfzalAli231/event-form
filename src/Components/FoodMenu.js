@@ -5,18 +5,14 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
-import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
 import Autocomplete from "@mui/material/Autocomplete";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
 
 import React, { useState } from "react";
 
 import FastfoodOutlinedIcon from "@mui/icons-material/FastfoodOutlined";
 import { useForm } from "react-hook-form";
+import { TextField } from '@mui/material';
 
 export default function FoodMenuMain() {
 
@@ -201,12 +197,6 @@ export default function FoodMenuMain() {
   const onSubmit = () => {
     console.log(JSON.stringify(selectedCategory));
   };
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setSelectedCategory(typeof value === "string" ? value.split(",") : value);
-  };
   const handleFormSubmit = (event) => {
     event.preventDefault();
     handleSubmit(onSubmit);
@@ -263,22 +253,32 @@ export default function FoodMenuMain() {
                     }}
                   >
                     <FormControl sx={{ m: 1, width: 300 }}>
-                      <InputLabel id="demo-multiple-chip-label">
-                        Choose Food Items*
-                      </InputLabel>
                       <Autocomplete
                         id={food.id}
                         style={{ width: "40rem" }}
                         multiple
                         name={food.catname}
-                        // value={selectedCategory}
-                        onChange={handleChange}
-                        input={
-                          <OutlinedInput
-                            id="select-multiple-chip"
-                            label="Choose Food Items*"
+                      options={food.categoryitems}
+                      // value={[]}
+                      disableCloseOnSelect
+                      onChange={(event, value) => {
+                        setValue(`${food.catname}`, value);
+                      }}
+                      getOptionLabel={(option) => {
+                        return option.catitemname
+                      }}
+                      getOptionSelected={(option, value) =>
+                          value.catitemname === option.catitemname
+                      }
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="outlined"
+                            label="Choose Food Items"
+                            placeholder="Add Food Item"
+                            name={food.catname}
                           />
-                        }
+                        )}
                         renderValue={(selected) => (
                           <Box
                             sx={{
@@ -294,19 +294,6 @@ export default function FoodMenuMain() {
                         )}
                         MenuProps={MenuProps}
                       >
-                        {food.categoryitems.map((name) => (
-                          <MenuItem
-                            key={name.catitemname}
-                            value={name.catitemname}
-                          >
-                            <Checkbox
-                              checked={
-                                selectedCategory.indexOf(name.catitemname) > -1
-                              }
-                            />
-                            <ListItemText primary={name.catitemname} />
-                          </MenuItem>
-                        ))}
                       </Autocomplete>
                     </FormControl>
                   </Grid>
@@ -314,6 +301,82 @@ export default function FoodMenuMain() {
               );
             })
           : "not found"}
+          {/* {foodCat
+          ? foodCat.map((food) => {
+              return (
+                <>
+                  <Grid item md={10} xs={12}>
+                    <FastfoodOutlinedIcon />
+                    <Typography variant="subtitle2" gutterBottom>
+                      {food.catname}
+                    </Typography>
+                  </Grid>
+                  <Grid item md={10} xs={12}>
+                    <Autocomplete
+                      multiple
+                      id={JSON.stringify(food.id)}
+                      name="foodCatID"
+                      options={food.categoryitems}
+                      // value={[]}
+                      disableCloseOnSelect
+                      onChange={(event, value) => {
+                        setValue(`${food.catname}`, value);
+                      }}
+                      getOptionLabel={(option) => {
+                        return option.catitemname;
+                      }}
+                      getOptionSelected={(option, value) =>
+                        value.catitemname === option.catitemname
+                      }
+                      renderOption={(option, { selected }) => (
+                        <>
+                          <Checkbox
+                            icon={icon}
+                            checkedIcon={checkedIcon}
+                            style={{ marginRight: 8 }}
+                            checked={selected}
+                            name="foodCatID"
+                          />
+                          {console.log(option)}
+                          {option.key}
+                        </>
+                      )}
+                      style={{ width: "100%" }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          variant="outlined"
+                          label="Choose Food Items"
+                          placeholder="Add Food Item"
+                          name={food.catname}
+                        />
+                      )}
+                      renderValue={(selected) => (
+                                  <div>
+                                    {selected.map((value) => (
+                                      <>
+                                        <Chip
+                                          key={value}
+                                          label={value}
+                                          clickable
+                                          deleteIcon={
+                                            <CancelIcon
+                                              onMouseDown={(event) => event.stopPropagation()}
+                                            />
+                                          }
+                                          onDelete={(e) => handleDelete(e, value)}
+                                          onClick={() => console.log("clicked chip")}
+                                        />
+                                      </>
+                                    ))}
+                                  </div>
+                                )}
+                    />
+                  </Grid>
+                </>
+              );
+            })
+          : "not found"} */}
         <div>
           <Button
             variant="contained"
@@ -331,7 +394,7 @@ export default function FoodMenuMain() {
             color="primary"
             variant="outlined"
             onClick={() => {
-              window.localStorage.removeItem("foodItemsCustom");
+              setSelectedCategory([]);
             }}
             style={{
               marginLeft: "47vw",

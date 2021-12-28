@@ -208,7 +208,7 @@ const Floralform = () => {
             <Input
               accept="image/*"
               id="contained-button-file"
-              multiple
+              multiple={5}
               type="file"
             />
           </label>
