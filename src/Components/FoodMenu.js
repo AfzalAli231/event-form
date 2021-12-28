@@ -8,7 +8,7 @@ import Chip from "@mui/material/Chip";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
+import Autocomplete from "@mui/material/Autocomplete";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
@@ -19,6 +19,8 @@ import FastfoodOutlinedIcon from "@mui/icons-material/FastfoodOutlined";
 import { useForm } from "react-hook-form";
 
 export default function FoodMenuMain() {
+
+  const [selectedCategory, setSelectedCategory] = useState([]);
 
   const [foodCat, setFoodCat] = useState([
     {
@@ -62,46 +64,6 @@ export default function FoodMenuMain() {
           createdAt: "2021-12-10T06:36:52.000Z",
           updatedAt: "2021-12-10T08:21:32.000Z",
         },
-        {
-          id: 5,
-          catid: 1,
-          catitemname: "Zarda5",
-          is_deleted: 0,
-          createdAt: "2021-12-10T06:36:58.000Z",
-          updatedAt: "2021-12-10T06:46:36.000Z",
-        },
-        {
-          id: 6,
-          catid: 1,
-          catitemname: "Kheer 6",
-          is_deleted: 0,
-          createdAt: "2021-12-10T09:02:28.000Z",
-          updatedAt: "2021-12-10T09:02:28.000Z",
-        },
-        {
-          id: 7,
-          catid: 1,
-          catitemname: "Kheer 7",
-          is_deleted: 0,
-          createdAt: "2021-12-10T06:36:52.000Z",
-          updatedAt: "2021-12-10T08:21:32.000Z",
-        },
-        {
-          id: 8,
-          catid: 1,
-          catitemname: "Zarda8",
-          is_deleted: 0,
-          createdAt: "2021-12-10T06:36:58.000Z",
-          updatedAt: "2021-12-10T06:46:36.000Z",
-        },
-        {
-          id: 9,
-          catid: 1,
-          catitemname: "Kheer 9",
-          is_deleted: 0,
-          createdAt: "2021-12-10T09:02:28.000Z",
-          updatedAt: "2021-12-10T09:02:28.000Z",
-        },
       ],
     },
     {
@@ -112,7 +74,40 @@ export default function FoodMenuMain() {
       is_deleted: 0,
       createdAt: "2021-12-10T06:33:23.000Z",
       updatedAt: "2021-12-10T06:33:23.000Z",
-      categoryitems: [],
+      categoryitems: [
+        {
+          id: 1,
+          catid: 1,
+          catitemname: "Kheer 1123",
+          is_deleted: 0,
+          createdAt: "2021-12-10T06:36:52.000Z",
+          updatedAt: "2021-12-10T08:21:32.000Z",
+        },
+        {
+          id: 2,
+          catid: 1,
+          catitemname: "Zarda234567",
+          is_deleted: 0,
+          createdAt: "2021-12-10T06:36:58.000Z",
+          updatedAt: "2021-12-10T06:46:36.000Z",
+        },
+        {
+          id: 3,
+          catid: 1,
+          catitemname: "Kheer 2213",
+          is_deleted: 0,
+          createdAt: "2021-12-10T09:02:28.000Z",
+          updatedAt: "2021-12-10T09:02:28.000Z",
+        },
+        {
+          id: 4,
+          catid: 1,
+          catitemname: "Kheer 45678i",
+          is_deleted: 0,
+          createdAt: "2021-12-10T06:36:52.000Z",
+          updatedAt: "2021-12-10T08:21:32.000Z",
+        },
+      ],
     },
     {
       id: 3,
@@ -122,7 +117,40 @@ export default function FoodMenuMain() {
       is_deleted: 0,
       createdAt: "2021-12-10T06:33:13.000Z",
       updatedAt: "2021-12-10T06:45:37.000Z",
-      categoryitems: [],
+      categoryitems: [
+        {
+          id: 1,
+          catid: 1,
+          catitemname: "Kheer 145",
+          is_deleted: 0,
+          createdAt: "2021-12-10T06:36:52.000Z",
+          updatedAt: "2021-12-10T08:21:32.000Z",
+        },
+        {
+          id: 2,
+          catid: 1,
+          catitemname: "Zarda3567",
+          is_deleted: 0,
+          createdAt: "2021-12-10T06:36:58.000Z",
+          updatedAt: "2021-12-10T06:46:36.000Z",
+        },
+        {
+          id: 3,
+          catid: 1,
+          catitemname: "Kheer 234567",
+          is_deleted: 0,
+          createdAt: "2021-12-10T09:02:28.000Z",
+          updatedAt: "2021-12-10T09:02:28.000Z",
+        },
+        {
+          id: 4,
+          catid: 1,
+          catitemname: "Kheer 4766879",
+          is_deleted: 0,
+          createdAt: "2021-12-10T06:36:52.000Z",
+          updatedAt: "2021-12-10T08:21:32.000Z",
+        },
+      ],
     },
     {
       id: 4,
@@ -132,12 +160,44 @@ export default function FoodMenuMain() {
       is_deleted: 0,
       createdAt: "2021-12-10T06:33:13.000Z",
       updatedAt: "2021-12-10T06:45:37.000Z",
-      categoryitems: [],
+      categoryitems: [
+        {
+          id: 1,
+          catid: 1,
+          catitemname: "Kheer 2134567",
+          is_deleted: 0,
+          createdAt: "2021-12-10T06:36:52.000Z",
+          updatedAt: "2021-12-10T08:21:32.000Z",
+        },
+        {
+          id: 2,
+          catid: 1,
+          catitemname: "Zarda56789",
+          is_deleted: 0,
+          createdAt: "2021-12-10T06:36:58.000Z",
+          updatedAt: "2021-12-10T06:46:36.000Z",
+        },
+        {
+          id: 3,
+          catid: 1,
+          catitemname: "Kheer 908767",
+          is_deleted: 0,
+          createdAt: "2021-12-10T09:02:28.000Z",
+          updatedAt: "2021-12-10T09:02:28.000Z",
+        },
+        {
+          id: 4,
+          catid: 1,
+          catitemname: "Kheer 4564",
+          is_deleted: 0,
+          createdAt: "2021-12-10T06:36:52.000Z",
+          updatedAt: "2021-12-10T08:21:32.000Z",
+        },
+      ],
     },
   ]);
-  const [selectedCategory, setSelectedCategory] = useState([]);
- 
-  const { handleSubmit } = useForm();
+  
+  const { handleSubmit, setValue } = useForm();
   const onSubmit = () => {
     console.log(JSON.stringify(selectedCategory));
   };
@@ -145,9 +205,7 @@ export default function FoodMenuMain() {
     const {
       target: { value },
     } = event;
-    setSelectedCategory(
-      typeof value === "string" ? value.split(",") : value
-    );
+    setSelectedCategory(typeof value === "string" ? value.split(",") : value);
   };
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -188,6 +246,7 @@ export default function FoodMenuMain() {
                     justifyContent: "center",
                     margin: "1vw",
                   }}
+                  key={food.id}
                 >
                   <Grid item md={2} xs={12}>
                     <FastfoodOutlinedIcon />
@@ -207,12 +266,12 @@ export default function FoodMenuMain() {
                       <InputLabel id="demo-multiple-chip-label">
                         Choose Food Items*
                       </InputLabel>
-                      <Select
-                        labelId="demo-multiple-chip-label"
-                        id="demo-multiple-chip"
+                      <Autocomplete
+                        id={food.id}
                         style={{ width: "40rem" }}
                         multiple
-                        value={selectedCategory}
+                        name={food.catname}
+                        // value={selectedCategory}
                         onChange={handleChange}
                         input={
                           <OutlinedInput
@@ -248,7 +307,7 @@ export default function FoodMenuMain() {
                             <ListItemText primary={name.catitemname} />
                           </MenuItem>
                         ))}
-                      </Select>
+                      </Autocomplete>
                     </FormControl>
                   </Grid>
                 </Container>
@@ -273,7 +332,6 @@ export default function FoodMenuMain() {
             variant="outlined"
             onClick={() => {
               window.localStorage.removeItem("foodItemsCustom");
-              setSelectedCategory([]);
             }}
             style={{
               marginLeft: "47vw",

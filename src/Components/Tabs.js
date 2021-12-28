@@ -198,7 +198,7 @@ const VanueForm = () => {
               <TabPanel value={value} index={0}>
                 <VenueFormm />
               </TabPanel>
-              <TabPanel value={value} index={1} style={{marginTop: "20"}}>
+              <TabPanel value={value} index={1} style={{ marginTop: "20" }}>
                 {<Foodoptions />}
               </TabPanel>
               <TabPanel value={value} index={2}></TabPanel>
