@@ -44,7 +44,6 @@ export default function Vendors() {
 
     const handleClickOpen = (deletedata) => {
         setOpen(true);
-        // console.log(deletedata);
         setValues({ ...values, id: deletedata.id });
     };
 

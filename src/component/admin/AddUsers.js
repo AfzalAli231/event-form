@@ -119,10 +119,6 @@ export default function AddUsers() {
         event.preventDefault();
         formik.handleSubmit();
 
-        //  console.log(values.userprofileimage);
-        // console.log(formik);
-        // console.log(formik.errors);
-        console.log(Object.keys(formik.errors).length);
         if (Object.keys(formik.errors).length === 0 && formik.dirty === true) {
             const dataform = new FormData()
             const response = await addUser(values);

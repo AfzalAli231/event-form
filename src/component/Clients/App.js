@@ -8,7 +8,6 @@ function App() {
   const state = useSelector(state => state.user);
 
   const handleSubmit = () =>{
-    console.log(state)
     // useAddEventMutation({ body: state });
   };
   return (

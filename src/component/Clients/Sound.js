@@ -11,13 +11,9 @@ import {addonssounddescription } from "../../app/rootSlice";
 
 
 const validationSchema = yup.object({
-  sound: yup
-    .string('Enter Sound Description')
-    .required('Required'),
-    qty: yup
-    .string('Enter Quantity')
-    .required('Required'),
-     
+  sound: yup.string("Enter Sound Description").required("Required"),
+  qty: yup.string("Enter Quantity").required("Required"),
+  specification: yup.string("Enter Specification").required("Required"),
 });
 
 
@@ -27,6 +23,7 @@ const Sound = () => {
     initialValues: {
       sound: '',
       qty: '',
+      specification: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -49,10 +46,6 @@ const Sound = () => {
   };
 
   const data = useSelector((state) => JSON.stringify(state.user.eventaddonssound))
-  console.log("data", data)
-
-
-  console.log("valuess", values)
 
 
   const dispatch = useDispatch();
@@ -126,13 +119,16 @@ const Sound = () => {
                 type="text"
                 value={values.specification}
                 fullWidth
+                id="specification"
+                name="specification"
                 style={{
                   width: "100%",
                   textAlign: "center",
                   marginTop: "10px",
                   backgroundColor: "#F5F5F5",
-                  border: "1px solid red",
                 }}
+                error={formik.touched.specification && Boolean(formik.errors.specification)}
+                helperText={formik.touched.specification && formik.errors.specification}
               />
             </div>
           </div>

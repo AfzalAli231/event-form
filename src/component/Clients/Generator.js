@@ -82,8 +82,6 @@ const Generator = () => {
 
       })}
       onSubmit={(values, formikHelpers) => {
-        console.log(values.eventDate + "values")
-        console.log(formikHelpers)
       }}
 
     >
@@ -91,7 +89,6 @@ const Generator = () => {
       {formik => (
         
         <div style={{marginTop:"20px"}} >
-          {console.log(formik.values)}
           <Form>
 
           

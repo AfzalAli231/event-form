@@ -55,10 +55,8 @@ export default function SignUp() {
   const [signupUser, { data, isLoading, error, isError, isSuccess }] =
   useSignupUserMutation();
 if (isSuccess) {
-  console.log(data);
 }
 if (isError) {
-  console.log(data);
 }
   const formik = useFormik({
     initialValues: {
@@ -136,7 +134,6 @@ if (isError) {
   const uploadImageHandler = (prop) => async (event) => {
 
     const newImage = event.target?.files?.[0];
-    console.log(URL.createObjectURL(newImage));
     if (newImage) {
       setImageurl(URL.createObjectURL(newImage));
       
@@ -171,21 +168,12 @@ if (isError) {
   const handleSubmit = (event) => {
     event.preventDefault();
     formik.handleSubmit();
-    console.log(values.userprofileimage);
-    console.log(formik);
-    console.log(formik.errors);
     if (Object.keys(formik.errors).length === 0) {
       const dataform = new FormData(event.currentTarget);
       // eslint-disable-next-line no-console
 
       signupUser(values);
-      console.log("FORMIK ERRORS",{
-        useremail: dataform.get('useremail'),
-        userpassword: dataform.get('userpassword'),
-        userfullname: dataform.get('userfullname'),
-        userprofileimage: dataform.get('userprofileimage'),
-        userrole: dataform.get('userrole'),
-      });
+     
     }
   };
 

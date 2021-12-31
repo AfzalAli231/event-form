@@ -52,18 +52,13 @@ export default function SignIn() {
 
 
       const [checked, setChecked] = React.useState(false);
-      console.log(checked);
       const handleChangeRemember = (event) => {
         setChecked(event.target.checked);
       };
       useEffect(() => {
       
         if(localStorage.getItem('user')!==""){
-            console.log("as");
-            console.log(localStorage.getItem('rememberMe'));
-            console.log(localStorage.getItem('user'));
             const emailget = localStorage.getItem('user');
-            console.log(emailget);
             setValues({ ...values, email: emailget });
             setChecked(localStorage.getItem('rememberMe'));
         }
@@ -94,11 +89,6 @@ export default function SignIn() {
     const email= data.get('email');
     localStorage.setItem('rememberMe', checked);
     localStorage.setItem('user', checked ? email : '');
-    console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-        rememberMe: checked,
-      });
     }
   };
 

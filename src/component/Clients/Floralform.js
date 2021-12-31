@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import { useFormik } from "formik";
 import FormControl from "@mui/material/FormControl";
-import {Box,} from "@mui/material"
+import {Box, FormHelperText, Grid,} from "@mui/material"
 import * as yup from "yup";
 import {
   Button,
@@ -15,11 +15,21 @@ import { useDispatch, useSelector } from "react-redux";
 import InputLabel from "@mui/material/InputLabel";
 import {addonsfloralservices} from "../../app/rootSlice"
 import { useGetextraQuery } from "../../services/extra";
+import UploadImage from "./FloralUploadImage";
 
 const validationSchema = yup.object({
+  kindsofflower: yup
+    .string("Enter your Kinds of Flower")
+    .required("Kinds of Flower is required"),
+  pricerange: yup
+    .string("Enter your Price Range")
+    .required("Price Range is required"),
   colortheme: yup
     .string("Enter your Color Theme")
     .required("Color Theme is required"),
+  explanation: yup
+    .string("Enter your Explaination")
+    .required("Explaination is required"),
 });
 
 
@@ -43,22 +53,80 @@ const Floralform = () => {
     pricerange: "",
     colortheme: "",
     explanation: "",
+    floralImageFiles: [],
   });
+  const [err, setErr] = useState()
   
   const handleChange = (prop) => (event) => {
     formik.handleChange(event);
     setValues({ ...values, [prop]: event.target.value });
   };
+  const floraldata = (event) => {
+    if (event.target.checked === true) {
+      setValues({
+        ...values,
+        floralservices: values.floralservices.concat(event.target.id),
+      });
+    }
+  };
 
   const state = useSelector((state) => JSON.stringify(state.user));
   
-  console.log("state", state);
   
   const handleSubmit = (event) => {
-    formik.handleSubmit();
-      dispatch(addonsfloralservices(values));
-  
     event.preventDefault();
+    formik.handleSubmit();
+
+        if (
+          values.floralservices.length > 0 &&
+          Object.keys(formik.errors).length === 0 &&
+          formik.dirty === true
+        ) {
+          console.log(values);
+          dispatch(addonsfloralservices(values));
+          if (Object.keys(formik.errors).length > 0 && formik.dirty === false) {
+            setValues();
+            dispatch(addonsfloralservices(values));
+          }
+        } else {
+          setErr("Floral Services Required");
+          setTimeout(() => {
+            setErr();
+          }, 3000);
+        }
+  };
+
+  const decorationImgChangeHandler = (e) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files).map((file) =>
+        URL.createObjectURL(file)
+      );
+      console.log("filesArray: ", filesArray);
+      // if(values.floralImageFiles.lenght < 5) {
+        setValues((prevStates) => ({
+          ...prevStates,
+          floralImageFiles: prevStates.floralImageFiles.concat(filesArray),
+        }));
+      // }else {
+        // setValues((prevStates) => ({
+        //   ...prevStates,
+        //   floralImageFiles: [],
+        // }));
+      // }
+      Array.from(e.target.files).map(
+        (file) => URL.revokeObjectURL(file) // avoid memory leak
+      );
+    }
+  };
+
+  const decorationImgDeleteHandler = (index) => {
+    values.floralImageFiles.splice(index);
+    setValues((prevStates) => ({
+      ...prevStates,
+      floralImageFiles: prevStates.floralImageFiles.filter(
+        (i) => i !== index
+      ),
+    }));
   };
 
   return (
@@ -74,37 +142,42 @@ const Floralform = () => {
               </div>
 
               <div style={{ display: "flex", flexDirection: "row" }}>
-                {INITIAL_STATE.data.filter((arr) =>
-                  arr.extratype.includes("Floral Services")
-                ).map((value, id) => {
-                  return (
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "stretch",
-                          width: "100%",
-                          alignItems: "center",
-                        }}
-                      >
-                        <div>
-                          <Checkbox
-                            id={value.id}
-                            style={{ marginLeft: "0.4rem" }}
-                            value={value.extradata}
-                            onChange={(e)=>{setValues({...values, floralservices: e.target.value.split(",")});console.log(e.target.value)}}
-                          />
-                        </div>
-                        <div style={{ fontSize: "0.8rem" }}>
-                          {value.extradata}
+                {INITIAL_STATE.data
+                  .filter((arr) => arr.extratype.includes("Floral Services"))
+                  .map((value, id) => {
+                    return (
+                      <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "stretch",
+                            width: "100%",
+                            alignItems: "center",
+                          }}
+                        >
+                          <div>
+                            <Checkbox
+                              id={value.id}
+                              style={{ marginLeft: "0.4rem" }}
+                              value={value.extradata}
+                              name="floralservices"
+                              onChange={(event) => {
+                                handleChange("floralservices");
+                                floraldata(event);
+                              }}
+                            />
+                          </div>
+                          <div style={{ fontSize: "0.8rem" }}>
+                            {value.extradata}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
 
+              <FormHelperText error>{err}</FormHelperText>
               <div
                 style={{
                   display: "flex",
@@ -123,22 +196,28 @@ const Floralform = () => {
                     </InputLabel>
                     <Select
                       labelId="demo-simple-select-filled-label"
-                      id="demo-simple-select-filled"
+                      id="kindsofflower"
+                      name="kindsofflower"
                       onChange={handleChange("kindsofflower")}
                     >
                       <MenuItem value="">
                         <em>None</em>
                       </MenuItem>
-                      {INITIAL_STATE.data.filter((arr) =>
-                        arr.extratype.includes("Floral Kind of Flowers")
-                      ).map((values, id) => {
-                        return (
-                          <MenuItem value={values.extradata}>
-                            {values.extradata}
-                          </MenuItem>
-                        );
-                      })}
+                      {INITIAL_STATE.data
+                        .filter((arr) =>
+                          arr.extratype.includes("Floral Kind of Flowers")
+                        )
+                        .map((values, id) => {
+                          return (
+                            <MenuItem value={values.extradata}>
+                              {values.extradata}
+                            </MenuItem>
+                          );
+                        })}
                     </Select>
+                    <FormHelperText error>
+                      {formik.errors.kindsofflower}
+                    </FormHelperText>
                   </FormControl>
                 </div>
 
@@ -153,22 +232,28 @@ const Floralform = () => {
                     </InputLabel>
                     <Select
                       labelId="demo-simple-select-filled-label"
-                      id="demo-simple-select-filled"
+                      id="pricerange"
+                      name="pricerange"
                       onChange={handleChange("pricerange")}
                     >
                       <MenuItem value="">
                         <em>None</em>
                       </MenuItem>
-                      {INITIAL_STATE.data.filter((arr) =>
-                        arr.extratype.includes("Floral Price Range")
-                      ).map((values, id) => {
-                        return (
-                          <MenuItem value={values.extradata}>
-                            {values.extradata}
-                          </MenuItem>
-                        );
-                      })}
+                      {INITIAL_STATE.data
+                        .filter((arr) =>
+                          arr.extratype.includes("Floral Price Range")
+                        )
+                        .map((values, id) => {
+                          return (
+                            <MenuItem value={values.extradata}>
+                              {values.extradata}
+                            </MenuItem>
+                          );
+                        })}
                     </Select>
+                    <FormHelperText error>
+                      {formik.errors.pricerange}
+                    </FormHelperText>
                   </FormControl>
                 </div>
                 <div style={{ width: "30%" }}>
@@ -202,6 +287,8 @@ const Floralform = () => {
                 <div style={{ width: "100%" }}>
                   <TextField
                     onChange={handleChange("explanation")}
+                    id="explanation"
+                    name="explanation"
                     label="Explain how  you want your theme  to be implemented"
                     type="text"
                     style={{
@@ -210,21 +297,21 @@ const Floralform = () => {
                       marginTop: "10px",
                     }}
                   />
+                  <FormHelperText error>
+                    {formik.errors.explanation}
+                  </FormHelperText>
                 </div>
               </div>
 
-              <div style={{ marginTop: "40px" }}>
-                Upload your refrences images
-              </div>
-              <label htmlFor="contained-button-file">
-                <input
-                  // style={{display: "none"}}
-                  accept="image/*"
-                  id="contained-button-file"
-                  multiple
-                  type="file"
+              <Grid item md={6} xs={12} align="left">
+                <UploadImage
+                style={{marginTop:"40px"}}
+                  labelTitle="Upload your reference images."
+                  onSelectedFiles={values.floralImageFiles}
+                  onImageChangeHandler={decorationImgChangeHandler}
+                  onImageDeleteHandler={decorationImgDeleteHandler}
                 />
-              </label>
+              </Grid>
 
               <div style={{ textAlign: "center", marginTop: "20px" }}>
                 <Button

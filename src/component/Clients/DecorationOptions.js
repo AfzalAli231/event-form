@@ -18,6 +18,7 @@ import DecorationSelect from "./DecorationSelect";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import eventDecoration from "../../app/rootSlice"
+import { Button } from "@mui/material";
 
 export default function Decorationoptions() {
   const [section, setSection] = useState({
@@ -27,12 +28,11 @@ export default function Decorationoptions() {
   });
 
     const [values, setValues] = useState({
-      menupackageid: section.existing ? 1 : "",
+      menupackageid: "",
       createyourown: "",
     });
 
   const handleChange = (event, check) => {
-    console.log(event);
     if (!check && event.target.name === "existing") {
       setSection({ customize: false, existing: true });
     } else if (!check && event.target.name === "customize") {
@@ -55,11 +55,21 @@ export default function Decorationoptions() {
       dispatch(eventDecoration(values));
     };
 
+    const handleSubmited = (event) => {
+      event.preventDefault();
+      Formik.handleSubmit();
+      // dispatch(eventDecoration(values));
+    };
+
   return (
     <React.Fragment style={{ marginTop: "50" }}>
       <CssBaseline />
 
-      <Decorationform handleChange={handleChange} />
+      <Decorationform
+        val={values}
+        setVal={setValues}
+        handleSubmit={handleSubmited}
+      />
 
       {section.customize && (
         <div style={{ marginTop: "2rem" }}>
@@ -216,6 +226,7 @@ export default function Decorationoptions() {
           </Grid>
         </Grid>
       </RadioGroup>
+
     </React.Fragment>
   );
 }

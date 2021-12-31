@@ -93,6 +93,7 @@ export const {
     NoOfGuest,
     EventDate,
     eventVenue,
+    eventDecoration,
     eventFood,
     addonsfloralservices,
     addonsdancetype,

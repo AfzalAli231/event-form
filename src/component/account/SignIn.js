@@ -46,11 +46,9 @@ export default function SignIn() {
     useSigninUserMutation();
   if (isSuccess) {
     localStorage.setItem('token', data.token);
-    //console.log(data.token);
     navigate("/");
   }
   if (isError) {
-    console.log(data);
   }
   const formik = useFormik({
     initialValues: {
@@ -70,18 +68,13 @@ export default function SignIn() {
 
 
   const [checked, setChecked] = React.useState(false);
-  //console.log(checked);
   const handleChangeRemember = (event) => {
     setChecked(event.target.checked);
   };
   useEffect(() => {
 
     if (localStorage.getItem('user') !== "") {
-      //  console.log("as");
-      //   console.log(localStorage.getItem('rememberMe'));
-      // console.log(localStorage.getItem('user'));
       const emailget = localStorage.getItem('user');
-      // console.log(emailget);
       setValues({ ...values, useremail: emailget });
       setChecked(localStorage.getItem('rememberMe'));
     }
@@ -114,11 +107,6 @@ export default function SignIn() {
       localStorage.setItem('rememberMe', checked);
       localStorage.setItem('user', checked ? email : '');
 
-      /* console.log({
-           useremail: data.get('useremail'),
-           userpassword: data.get('userpassword'),
-           rememberMe: checked,
-         });*/
     }
   };
 

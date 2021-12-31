@@ -31,7 +31,6 @@ export default function FoodMenuMain({values, setValues}) {
   const { handleSubmit, setValue } = useForm();
   const onSubmit = () => {
         setValues({...values, createyourown: data})        
-                        console.log(values);
   };
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -111,7 +110,6 @@ export default function FoodMenuMain({values, setValues}) {
                         setSelectedCategory(value);
                         setData({ ...data, selected: selectedCategory });
                         setValues({ ...values, createyourown: data });    
-                        console.log(values)
                       }}
                       getOptionLabel={(option) => {
                         return option.catitemname
@@ -168,7 +166,6 @@ export default function FoodMenuMain({values, setValues}) {
             onClick={() => {
               setSelectedCategory([]);
               setValues({...values, createyourown: ""})
-              console.log(values);
             }}
             style={{
               marginLeft: "47vw",

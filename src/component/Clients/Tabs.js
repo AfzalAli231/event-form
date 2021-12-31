@@ -76,12 +76,10 @@ const VanueForm = () => {
   const [startTime, setTimeStart] = useState(new Date());
 
   const [endTimee, setEndTime] = useState(new Date());
-console.log(setTimeStart, setEndTime);
 
   // const [checked, setChecked] = useState();
 
 
-  console.log("time", startTime)
 
   const [values, setValues] = useState({
     prefferedArea1: "",
@@ -97,10 +95,8 @@ console.log(setTimeStart, setEndTime);
     setValues({ ...values, [prop]: event.target.value });
   };
 
-  console.log(handleChangee);
 
 
-  console.log("values", values)
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -120,7 +116,6 @@ const handleChangeCategory = (event) => {
   // this function is responsible for defining the value that if the tab can display or not
   const tabMenuDisplayHandler = () => {
     const values = Object.values(categorySwitch);
-    // console.log(values);
     return values.find((item) => {
       return item === true;
     });
@@ -226,8 +221,6 @@ const handleChangeCategory = (event) => {
               .required("Required"),
           })}
           onSubmit={(values, formikHelpers) => {
-            console.log(values + "values");
-            console.log(formikHelpers);
           }}
         >
           {(formik) => (

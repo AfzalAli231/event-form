@@ -2,26 +2,23 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import FormControl from '@mui/material/FormControl';
 import * as yup from 'yup';
-import {Button, FormGroup, Select, MenuItem, Box} from "@mui/material"
+import {Button, FormGroup, Select, MenuItem, Box, FormHelperText} from "@mui/material"
 import TextFeild from "@mui/material/TextField"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import InputLabel from '@mui/material/InputLabel';
-// import INITIAL_STATE from "../state"
 import {addonsdancetype} from "../../app/rootSlice"
 import { useGetextraQuery } from '../../services/extra';
 
 
 const validationSchema = yup.object({
-  type: yup
-    .string('Enter your Dance Type')
-    .required('Preffered Area is required'),
+  type: yup.string("Enter your Dance Type").required("Dance Type is required"),
   size: yup
-    .string('Enter your Dance Floor')
-    .required('Start Time is required'),
+    .string("Enter your Dance Floor")
+    .required("Dance Floor is required"),
   circular: yup
-    .string('Enter your Circular Trussing')
-    .required('End Time is required'),
-     
+    .string("Enter your Circular Trussing")
+    .required("Circular Trussing is required"),
+  specs: yup.string("Enter your Specs").required("Specs is required"),
 });
 const Dancefloor = () => {
 
@@ -33,29 +30,30 @@ const Dancefloor = () => {
       circular: ''
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-  
-    },
+    onSubmit: (values) => {},
   });
+
+  const handleChangee = (prop) => (event)=>{
+    formik.handleChange(event);
+    setValues({...values, [prop]: event.target.value})
+  }
 
   
 const INITIAL_STATE = useGetextraQuery();
   const [values, setValues] = useState({
-
     type: "",
     addonsDanceSize: "",
     addonsDanceCircullarTrussing: "",
     specs:""
   })
 
-  console.log("values", values)
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     formik.handleSubmit()
-    if (Object.keys(formik.errors).length === 0) {
+    // if (Object.keys(formik.errors).length === 0) {
         dispatch(addonsdancetype(values))
-    }
+    // }
     
     event.preventDefault()
 }
@@ -64,201 +62,178 @@ const INITIAL_STATE = useGetextraQuery();
     <div>
       <Box component="form" onSubmit={handleSubmit}>
         {INITIAL_STATE.isFetching ? (
-          "...Loading"
-        ) : (
-          <>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "space-between",
-              }}
-            >
-              <div style={{ width: "30%" }}>
-                <FormGroup>
-                  <FormControl
-                    variant="standard"
-                    style={{ width: "100%", backgroundColor: "#F5F5F5" }}
-                    sx={{ m: 1, minWidth: 120 }}
-                  >
-                    <InputLabel
-                      id="demo-simple-select-filled-label"
-                      style={{
-                        paddingLeft: "10px",
-                        paddingTop: "1px",
-                        paddingBottom: "1px",
-                      }}
-                    >
-                      Type
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-filled-label"
-                      // id="demo-simple-select-filled"
-                      name="type"
-                      value={values.type}
-                      id={values.id}
-                      error={formik.touched.type && Boolean(formik.errors.type)}
-                      helperText={formik.touched.type && formik.errors.type}
-                      variant="outlined"
-                      onChange={setValues({ ...values, type: values.id })}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      {INITIAL_STATE.data
-                        .filter((arr) =>
+           "...Loading" 
+         ) : (
+           <> 
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+          }}
+        >
+          <div style={{ width: "30%" }}>
+            <FormGroup>
+              <FormControl
+                variant="standard"
+                style={{ width: "100%", backgroundColor: "#F5F5F5" }}
+                sx={{ m: 1, minWidth: 120 }}
+              >
+                <InputLabel
+                  id="demo-simple-select-filled-label"
+                  style={{
+                    paddingLeft: "10px",
+                    paddingTop: "1px",
+                    paddingBottom: "1px",
+                  }}
+                >
+                  Type
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-filled-label"
+                  id="type"
+                  name="type"
+                  value={values.type}
+                  // id={values.id}
+                  variant="outlined"
+                  onChange={handleChangee("type")}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {INITIAL_STATE.data.filter((arr) =>
                           arr.extratype.includes("Dance Floor Type")
-                        )
-                        .map((values, id) => {
+                        ).map((values) => {
                           return (
                             <MenuItem value={values.extradata} id={values.id}>
                               {values.extradata}
                             </MenuItem>
                           );
                         })}
-                    </Select>
-                  </FormControl>
-                </FormGroup>
-              </div>
+                </Select>
+                <FormHelperText error>{formik.errors.type}</FormHelperText>
+              </FormControl>
+            </FormGroup>
+          </div>
 
-              <div style={{ width: "30%" }}>
-                <FormGroup>
-                  <FormControl
-                    variant="standard"
-                    style={{ width: "100%", backgroundColor: "#F5F5F5" }}
-                    sx={{ m: 1, minWidth: 120 }}
-                  >
-                    <InputLabel
-                      id="demo-simple-select-filled-label"
-                      style={{
-                        paddingLeft: "10px",
-                        paddingTop: "1px",
-                        paddingBottom: "1px",
-                      }}
-                    >
-                      Size
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-filled-label"
-                      value={values.addonsDanceSize}
-                      name="size"
-                      variant="outlined"
-                      id={values.id}
-                      error={formik.touched.size && Boolean(formik.errors.size)}
-                      helperText={formik.touched.size && formik.errors.size}
-                      onChange={setValues({
-                        ...values,
-                        addonsDanceSize: values.id,
-                      })}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      {INITIAL_STATE.data
-                        .filter((arr) =>
+          <div style={{ width: "30%" }}>
+            <FormGroup>
+              <FormControl
+                variant="standard"
+                style={{ width: "100%", backgroundColor: "#F5F5F5" }}
+                sx={{ m: 1, minWidth: 120 }}
+              >
+                <InputLabel
+                  id="demo-simple-select-filled-label"
+                  style={{
+                    paddingLeft: "10px",
+                    paddingTop: "1px",
+                    paddingBottom: "1px",
+                  }}
+                >
+                  Size
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-filled-label"
+                  value={values.addonsDanceSize}
+                  name="size"
+                  id="size"
+                  variant="outlined"
+                  onChange={handleChangee("addonsDanceSize")}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {INITIAL_STATE.data.filter((arr) =>
                           arr.extratype.includes("Dance Floor Size")
-                        )
-                        .map((values, id) => {
+                        ).map((values, id) => {
                           return (
                             <MenuItem value={values.extradata}>
                               {values.extradata}
                             </MenuItem>
                           );
                         })}
-                    </Select>
-                  </FormControl>
-                </FormGroup>
-              </div>
+                </Select>
+                <FormHelperText error>{formik.errors.size}</FormHelperText>
+              </FormControl>
+            </FormGroup>
+          </div>
 
-              <div style={{ width: "30%" }}>
-                <FormGroup>
-                  <FormControl
-                    variant="standard"
-                    style={{ width: "100%", backgroundColor: "#F5F5F5" }}
-                    sx={{ m: 1, minWidth: 120 }}
-                  >
-                    <InputLabel
-                      id="demo-simple-select-filled-label"
-                      style={{
-                        paddingLeft: "10px",
-                        paddingTop: "1px",
-                        paddingBottom: "1px",
-                      }}
-                    >
-                      Circular Trussing
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-filled-label"
-                      // id="demo-simple-select-filled"
-                      name="circular"
-                      value={values.addonsDanceCircullarTrussing}
-                      id={values.id}
-                      error={
-                        formik.touched.circular &&
-                        Boolean(formik.errors.circular)
-                      }
-                      helperText={
-                        formik.touched.circular && formik.errors.circular
-                      }
-                      variant="outlined"
-                      onChange={setValues({
-                        ...values,
-                        addonsDanceCircullarTrussing: values.id,
-                      })}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      {INITIAL_STATE.data
-                        .filter((arr) =>
+          <div style={{ width: "30%" }}>
+            <FormGroup>
+              <FormControl
+                variant="standard"
+                style={{ width: "100%", backgroundColor: "#F5F5F5" }}
+                sx={{ m: 1, minWidth: 120 }}
+              >
+                <InputLabel
+                  id="demo-simple-select-filled-label"
+                  style={{
+                    paddingLeft: "10px",
+                    paddingTop: "1px",
+                    paddingBottom: "1px",
+                  }}
+                >
+                  Circular Trussing
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-filled-label"
+                  id="circular"
+                  name="circular"
+                  value={values.addonsDanceCircullarTrussing}
+                  variant="outlined"
+                  onChange={handleChangee("addonsDanceCircullarTrussing")}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {INITIAL_STATE.data.filter((arr) =>
                           arr.extratype.includes(
                             "Dance Floor Circular Trussing"
                           )
-                        )
-                        .map((values, id) => {
+                        ).map((values, id) => {
                           return (
                             <MenuItem value={values.extradata}>
                               {values.extradata}
                             </MenuItem>
                           );
                         })}
-                    </Select>
-                  </FormControl>
-                </FormGroup>
-              </div>
-            </div>
+                </Select>
+                <FormHelperText error>{formik.errors.circular}</FormHelperText>
+              </FormControl>
+            </FormGroup>
+          </div>
+        </div>
 
-            <div style={{ marginTop: "10px" }}>
-              <div style={{ width: "100%" }}>
-                <TextFeild
-                  label="Add specification if any"
-                  id={values.id}
-                  name="Explain"
-                  type="text"
-                  style={{
-                    width: "100%",
-                    textAlign: "center",
-                    marginTop: "10px",
-                    backgroundColor: "#F5F5F5",
-                  }}
-                  onChange={(e)=>setValues({
-                    ...values,
-                    specs: e.target.value,
-                  })}
-                />
-              </div>
-            </div>
+        <div style={{ marginTop: "10px" }}>
+          <div style={{ width: "100%" }}>
+            <TextFeild
+              label="Add specification if any"
+              name="specs"
+              id="specs"
+              type="text"
+              style={{
+                width: "100%",
+                textAlign: "center",
+                marginTop: "10px",
+                backgroundColor: "#F5F5F5",
+              }}
+              onChange={handleChangee("specs")}
+            />
+            <FormHelperText error>{formik.errors.specs}</FormHelperText>
+          </div>
+        </div>
 
-            <div style={{ textAlign: "center", marginTop: "20px" }}>
-              <Button
-                type="submit"
-                style={{ backgroundColor: "rgb(0, 255, 136)", color: "black" }}
-              >
-                Save
-              </Button>
-            </div>
-          </>
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <Button
+            type="submit"
+            style={{ backgroundColor: "rgb(0, 255, 136)", color: "black" }}
+          >
+            Save
+          </Button>
+        </div>
+        </>
         )}
       </Box>
     </div>
@@ -266,203 +241,5 @@ const INITIAL_STATE = useGetextraQuery();
 }
 
 export default Dancefloor
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useState } from 'react';
-// import { Formik, Field, Form, ErrorMessage } from 'formik';
-// import FormControl from '@mui/material/FormControl';
-// import * as Yup from 'yup';
-// import {Button, FormGroup, TextField, Select, MenuItem, Checkbox} from "@mui/material"
-// import TextFeild from "@mui/material/TextField"
-// import { useDispatch, useSelector } from "react-redux";
-// import {setUser,EventType,NoOfGuest,EventDate } from "../rootSlice";
-// import InputLabel from '@mui/material/InputLabel';
-// import INITIAL_STATE from "../state"
-// import {addonsdancetype} from "../rootSlice"
-
-
-
-// const Dashboard = () => {
-
-//   const initialValues = {
-//     kindsOfFlower: "",
-//     priceRange: "",
-//     colorTheme: "",
-//     Explain: "",
-    
-//   };
-
-//   const [floorType, setFloorType] = React.useState('');
-
-  
-//   const [values, setValues] = useState({
-
-//     addonsDanceType: "",
-//     addonsDanceSize: "",
-//     addonsDanceCircullarTrussing: "",
-//     specs:""
-//   })
-
-//   const handleChange = (prop) => (event) => {
-//     setValues({ ...values, [prop]: event.target.value });
-//   };
-
-//   const dispatch = useDispatch();
-
-//   dispatch(addonsdancetype(values));
-
-//     return (
-//         <div  >
-//             <Formik
-//             enableReinitialize
-//       initialValues={ initialValues}
-//       validationSchema={Yup.object({
-
-//         kindsOfFlower: Yup.string().min(10, 'Must be greater than 10').required("Required"),
-//         priceRange: Yup.string().min(10, 'Must be greater than 10').required("Required"),
-//         colorTheme: Yup.string().min(10, 'Must be greater than 10').required("Required"),
-//         Explain: Yup.string().min(10, 'Must be greater than 10').required("Required"),
-        
-//       })}
-
-//       onSubmit={(values, formikHelpers) => {
-//         console.log(values.eventDate + "values")
-//         console.log(formikHelpers)
-//       }}
-
-//     >
-      
-//       {formik => (
-        
-//         <div style={{marginTop:"20px"}} >
-//           {console.log(formik.values)}
-//           <Form>
-
-          
-
-//              <div  style={{display:"flex", flexDirection:"row", flexWrap:"wrap" , justifyContent:"space-between"}}>
-
-            
-
-
-//                      <div style={{width:"30%"}}>
-//                           <FormControl variant="standard" style={{width:"100%", backgroundColor:"#F5F5F5"}} sx={{ m: 1, minWidth: 120 }}>
-//                           <InputLabel id="demo-simple-select-filled-label">Type</InputLabel>
-//                           <Select
-//                             labelId="demo-simple-select-filled-label"
-//                             id="demo-simple-select-filled"
-//                             // value={floorType}
-//                             onChange={handleChange("addonsDanceType")}
-//                             variant="outlined"
-//                             name="kindsOfFlower"
-//                             >
-//                             <MenuItem value="">
-//                                 <em>None</em>
-//                             </MenuItem>
-//                             {INITIAL_STATE.filter(arr => arr.extratype.includes("Dance Floor Type")).map((values, id) => {
-//                               return(
-                               
-//                                   <MenuItem value={values.extradata}>{values.extradata}</MenuItem>
-                               
-//                               )
-//                             })}
-                            
-//                             </Select>
-                            
-//                             </FormControl>
-//                           </div>
-
- 
-
-//                           <div style={{width:"30%"}}>
-//                           <FormControl variant="standard" style={{width:"100%", backgroundColor:"#F5F5F5"}} sx={{ m: 1, minWidth: 120 }}>
-//                           <InputLabel id="demo-simple-select-filled-label">Size</InputLabel>
-//                           <Select
-//                             labelId="demo-simple-select-filled-label"
-//                             id="demo-simple-select-filled"
-//                             // value={floorSize}
-//                             variant="outlined"
-//                             onChange={handleChange("addonsDanceSize")}
-//                             >
-//                             <MenuItem value="">
-//                                 <em>None</em>
-//                             </MenuItem>
-//                             {INITIAL_STATE.filter(arr => arr.extratype.includes("Dance Floor Size")).map((values, id) => {
-//                               return(
-//                                 <MenuItem value={values.extradata}>{values.extradata}</MenuItem>
-//                               )
-//                             })}
-
-//                             </Select>
-//                             </FormControl>
-//                           </div>
-
-//                           <div style={{width:"30%"}}>
-//                           <FormControl variant="standard" style={{width:"100%", backgroundColor:"#F5F5F5"}} sx={{ m: 1, minWidth: 120 }}>
-//                           <InputLabel id="demo-simple-select-filled-label">Circular Trussing</InputLabel>
-//                           <Select
-//                             labelId="demo-simple-select-filled-label"
-//                             id="demo-simple-select-filled"
-
-//                             variant="outlined"
-//                             onChange={handleChange("addonsDanceCircullarTrussing")}
-//                             >
-//                             <MenuItem value="">
-//                                 <em>None</em>
-//                             </MenuItem>
-//                             {INITIAL_STATE.filter(arr => arr.extratype.includes("Dance Floor Circular Trussing")).map((values, id) => {
-//                               return(
-//                                 <MenuItem value={values.extradata}>{values.extradata}</MenuItem>
-//                               )
-//                             })}
-//                             </Select>
-//                             </FormControl>
-//                           </div>
-//              </div>
-
-//               <div style={{marginTop:"10px"}}>
-//               <div  style={{width:"100%"}}>
-//                 <TextFeild label="Add specification if any" name="Explain" type="text"  
-//                 style={{width:"100%" ,  textAlign:"center", marginTop:"10px", backgroundColor:"#F5F5F5"}} 
-//                 onChange={handleChange("specs")} />
-//                 </div>
-//               </div>
-
-              
-            
-             
-//           </Form>
-//         </div>
-        
-//       )}
-
-//     </Formik>
-//         </div>
-//     )
-// }
-
-// export default Dashboard
 
 

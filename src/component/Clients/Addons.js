@@ -22,10 +22,7 @@ export default function ControlledAccordions() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  console.log(expanded);
-  console.log(handleChange);
-
-  const [toggle, setToggle] = React.useState(false)
+  const [firstToggle, setFirstToggle] = React.useState(false)
 
   const [secondToggle, setSecondToggle] = React.useState(false)
 
@@ -43,8 +40,9 @@ export default function ControlledAccordions() {
 
 
 
-  const toggleChange = (panel) => (event, isExpand) => {
-      setToggle(isExpand  ? panel :  false)
+  const FirstToggleChange = (panel) => (event, isExpand) => {
+    // console.log(event)
+      setFirstToggle(isExpand  ? panel :  false)
   }
 
   const SecondToggleChange = (panel) => (event, isExpand) => {
@@ -74,19 +72,12 @@ const SeventhToggleChange = (panel) => (event, isExpand) => {
 const EighthToggleChange = (panel) => (event, isExpand) => {
   setEighthToggle(isExpand  ? panel :  false)
 }
-
-
-console.log(toggle === "panel1" ? 1 : 0)
-console.log(secondToggle === "panel2" ? 1 : 0)
-console.log(thirdToggle === "panel3" ? 1 : 0)
-console.log(fourthToggle === "panel4" ? 1 : 0)
-
   return (
     <div>
-      <Accordion expanded={toggle === 'panel1'} onChange={toggleChange('panel1')}  TransitionProps={{ unmountOnExit: true }}>
+      <Accordion expanded={firstToggle === 'panel1'} onChange={FirstToggleChange('panel1')}  TransitionProps={{ unmountOnExit: true }}>
         <AccordionSummary 
         style={{backgroundColor:"#F5F5F5", padding:"10px 0px 10px 15px"}}
-          expandIcon={<Checkbox checked={toggle} /> }
+          expandIcon={<Checkbox checked={firstToggle} /> }
           aria-controls="panel1bh-content"
           id="panel1bh-header"
           

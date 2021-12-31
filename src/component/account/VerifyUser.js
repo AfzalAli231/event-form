@@ -41,12 +41,6 @@ export default function VerifyUser() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
    
-    console.log({
-        code1: data.get('code1'),
-        code2: data.get('code2'),
-        code3: data.get('code3'),
-        code4: data.get('code4'),
-      });
   };
 
 

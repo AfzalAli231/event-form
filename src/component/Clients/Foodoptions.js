@@ -38,10 +38,8 @@ export default function Foodoptions() {
   };
 
   const handleChange = (event, check) => {
-    console.log(event);
     if (!check && event.target.name === "existing") {
       setSection({ customize: false, existing: true });
-      console.log(values)
     } else if (!check && event.target.name === "customize") {
       setSection({ customize: true, existing: false });
     } else if (check && event.edit === "Edit Menu") {

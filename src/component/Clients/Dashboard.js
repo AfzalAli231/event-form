@@ -12,13 +12,13 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 // import DateTimePicker from '@mui/lab/DateTimePicker';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import { useGetextraQuery } from "../../services/extra";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material";
 // import MobileDatePicker from '@mui/lab/MobileDatePicker';
 
 
 const initialValues = {
   eventTitle: '',
-  eventType: '',
+  eventType: "",
   noOfGuest: 0,
   eventDate: "",
 }
@@ -44,7 +44,7 @@ const timeChange = (newValue) => {
   };
 
   const EventHandleChange = (e) => {
-    dispatch(EventType(e.target.value));
+    e.target.value !== "None" && dispatch(EventType(e.target.value));
   }
 
   const NoOfGuestHandleChange = (e) => {
@@ -75,12 +75,9 @@ const timeChange = (newValue) => {
                 .required("Required"),
               eventType: Yup.string().required("Required"),
               noOfGuest: Yup.number().required("Required"),
-              eventDate: Yup.date().required("Required"),
+              eventDate: Yup.date().required("required"),
             })}
-            onSubmit={(values, formikHelpers) => {
-              // console.log(values.eventDate + "values")
-              // console.log(formikHelpers)
-            }}
+            onSubmit={(values, formikHelpers) => {}}
           >
             {(formik) => (
               <div>
@@ -92,7 +89,6 @@ const timeChange = (newValue) => {
                     </p>
                   </div>
                 </div>
-                {/* {console.log(formik.values)} */}
                 <Form>
                   <div
                     style={{
@@ -136,7 +132,7 @@ const timeChange = (newValue) => {
                             )
                             .map((values, id) => {
                               return (
-                                <MenuItem key={id} value={values.extradata}>
+                                <MenuItem key={id} value={values.id}>
                                   {values.extradata}
                                 </MenuItem>
                               );
@@ -167,21 +163,21 @@ const timeChange = (newValue) => {
                       <ErrorMessage name="noOfGuest" />
                     </div>
                     <div style={{ width: "45%" }}>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                          <Stack>
-                            <DesktopDatePicker
-                              label="dd/mm/yyyy"
-                              inputFormat="dd/mm/yyyy"
-                              name="eventDate"
-                              onChange={(timeChange, EventDateHandleChange)}
-                              value={eventdate}
-                              renderInput={(params) => (
-                                <TextField {...params} />
-                              )}
-                            />
-                          </Stack>
-                        </LocalizationProvider>
-                      <ErrorMessage name="eventDate" />
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <Stack>
+                          <DesktopDatePicker
+                            label="dd/mm/yyyy"
+                            inputFormat="dd/mm/yyyy"
+                            name="eventDate"
+                            onChange={(timeChange, EventDateHandleChange)}
+                            value={value}
+                            renderInput={(params) => <TextField {...params} />}
+                          />
+                        </Stack>
+                        <FormHelperText error>
+                          {formik.errors.eventDate}
+                        </FormHelperText>
+                      </LocalizationProvider>
                     </div>
                   </div>
                 </Form>

@@ -7,24 +7,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { addonsprojectorsneeded } from "../../app/rootSlice"
 
 const validationSchema = Yup.object({
-    projectorNeeded: Yup.string().required("Required"),
+  projectorNeeded: Yup.string().required("Required"),
 
-    projectorSizeFor: Yup.string().required("Required"),
+  projectorSizeFor: Yup.string().required("Required"),
 
-    projectorQuantityFor: Yup.string().required("Required"),
+  projectorQuantityFor: Yup.string().required("Required"),
 
-    ledNeeded: Yup.string().required("Requiired"),
+  ledNeeded: Yup.string().required("Requiired"),
 
-    ledSizeFor: Yup.string().required("Requiired"),
+  ledSizeFor: Yup.string().required("Requiired"),
 
-    ledQty: Yup.string().required("Requiired"),
+  ledQty: Yup.string().required("Requiired"),
 
-    smdPlasmaNeededfor: Yup.string().required("Requiired"),
+  smdPlasmaNeededfor: Yup.string().required("Requiired"),
 
-    smdPlasmaSizee: Yup.string().required("Requiired"),
+  smdPlasmaSizee: Yup.string().required("Requiired"),
 
-    smdPlasmaQty: Yup.string().required("Requiired"),
-})
+  smdPlasmaQty: Yup.string().required("Requiired"),
+
+  specifications: Yup.string().required("Requiired"),
+});
 
 
 
@@ -34,22 +36,20 @@ const VanueForm = () => {
  
 
   const formik = useFormik({
-      initialValues: {
-      projectorNeeded: '',
-      projectorQuantityFor: '',
-      projectorSizeFor: '',
-      ledNeeded: '',
-      ledSizeFor: '',
-      ledQty: '',
-      smdPlasmaNeededfor: '',
-      smdPlasmaSizee: '',
-      smdPlasmaQty: '',
-     
+    initialValues: {
+      projectorNeeded: "",
+      projectorQuantityFor: "",
+      projectorSizeFor: "",
+      ledNeeded: "",
+      ledSizeFor: "",
+      ledQty: "",
+      smdPlasmaNeededfor: "",
+      smdPlasmaSizee: "",
+      smdPlasmaQty: "",
+      specifications: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-  
-    },
+    onSubmit: (values) => {},
   });
 
   const [values, setValues] = useState({
@@ -77,9 +77,6 @@ const VanueForm = () => {
 
   const state = useSelector((state) => JSON.stringify(state.user))
 
-  console.log("state", state)
-
-  console.log("values", values)
 
 
   const handleSubmit = (event) => {
@@ -345,10 +342,17 @@ const VanueForm = () => {
               <div style={{ width: "100%", marginTop: "20px" }}>
                 <TextField
                   label="Add your specification (if any)"
-                  name="smdPlasmaQuantity"
+                  name="specifications"
+                  id="specifications"
                   onChange={handleChange("addonsdisplayanySpecify")}
-                  // value={values.addonsdisplayanySpecify}
                   type="text"
+                  error={
+                    formik.touched.specifications &&
+                    Boolean(formik.errors.specifications)
+                  }
+                  helperText={
+                    formik.touched.specifications && formik.errors.specifications
+                  }
                   style={{
                     backgroundColor: "#F5F5F5",
                     width: "100%",

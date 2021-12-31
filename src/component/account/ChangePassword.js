@@ -56,11 +56,6 @@ export default function ChangePassword() {
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
   
-    console.log({
-      useroldpassword: data.get('useroldpassword'),
-      usernewpassword: data.get('usernewpassword'),
-
-      });
   };
 
 

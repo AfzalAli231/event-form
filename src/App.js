@@ -65,8 +65,6 @@ function App() {
   };
 
    
-console.log("token",token);
-
   return (
     <ThemeProvider theme={theme}>
     <div className="App" >

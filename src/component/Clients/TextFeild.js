@@ -6,7 +6,6 @@ import { TextField} from "@mui/material"
 const TextFeild = ({label, ...props}) => {
 
     const [field] = useField(props)
-    // console.log(field)
 
     return (
         <div style={{ textAlign:"center"}}>

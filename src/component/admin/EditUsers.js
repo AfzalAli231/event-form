@@ -159,10 +159,6 @@ export default function EditUsers() {
         event.preventDefault();
 
         formik.handleSubmit(event);
-
-        console.log("file", values.userprofileimage);
-        console.log(formik);
-        console.log(formik.errors);
         console.warn(Object.keys(formik.errors).length);
         if (Object.keys(formik.errors).length === 0) {
             const dataform = new FormData()
