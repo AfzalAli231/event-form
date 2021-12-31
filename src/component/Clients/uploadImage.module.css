@@ -1,0 +1,31 @@
+.uploadImage {
+  position: relative;
+  width: 20%;
+  /* display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center; */
+  display: inline-block;
+}
+
+.uploadImage img {
+  max-width: 80%;
+  margin: 0.2rem;
+  z-index: 1;
+}
+
+.uploadImage span {
+  position: absolute;
+  top: 0;
+  right: 40px;
+  cursor: pointer;
+  color: #9c27b0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.1s ease-in-out;
+}
+
+.uploadImage span:hover {
+  color: #6d1b7b;
+  transform: scale(1.1);
+}

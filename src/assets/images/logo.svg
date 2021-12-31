@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 674.85 138.357">
+  <defs>
+    <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0.038" stop-color="#8c28be"/>
+      <stop offset="1" stop-color="#8c28be"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0.823" stop-color="#d9317c"/>
+      <stop offset="0.984" stop-color="#d9317c"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_11" data-name="Group 11" transform="translate(-14952 -5082)">
+    <g id="Group_10" data-name="Group 10">
+      <g id="Group_9" data-name="Group 9" transform="translate(14926.001 5057.196)">
+        <g id="Group_8" data-name="Group 8">
+          <g id="Group_7" data-name="Group 7">
+            <path id="Path_3" data-name="Path 3" d="M161.92,96.63c0-40.86-46.87-63.3-46.87-63.3V47.85c34.85,14.35,34.53,48.99,34.53,48.99,2.53,51.95-58.5,57.23-58.5,57.23V49.74C66.79,52.49,52.01,73.5,52.01,73.5c-19.01,31.04,3.16,54.49,3.16,54.49l8.88-8.87c-4.91-4.91-6.02-14.88-6.02-14.88l21.22.16v58.76C169.53,163.47,161.92,96.63,161.92,96.63ZM79.09,92.51H57.71S59.6,70.49,79.09,65.1Z" fill="url(#linear-gradient)"/>
+            <path id="Path_4" data-name="Path 4" d="M96.2,43.87l.15,102.81s33.9-.63,44.36-35.8H128.13s-1.89,8.88-19.74,21.34l.11-27.98,33.26-.11V91.4l-32.81.08V65.82s12,.92,18.66,19.93l12.57.1a45.019,45.019,0,0,0-32.46-34.69l.12-19.36S26.03,26.56,26.03,98.34c0,0-2.85,45.81,45.93,63.54v-13.3S40.59,138.16,39.01,96.8C39.01,96.8,35.53,48.15,96.2,43.87Z" fill="url(#linear-gradient-2)"/>
+          </g>
+        </g>
+        <text id="AssistEvent" transform="translate(178.849 101.804)" fill="#8c28be" font-size="99.734" font-family="Helvetica"><tspan x="0" y="0">Assist</tspan><tspan y="0" fill="#f1007b">Event</tspan></text>
+        <text id="Your_personal_event_assistant" data-name="Your personal event assistant" transform="translate(179.729 145.962)"  font-size="39.425" font-family="Helvetica"><tspan x="0" y="0">Your personal event assistant</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
